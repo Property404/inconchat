@@ -16,7 +16,7 @@ void User::setName(const std::string& s){
 }
 
 
-Message::Message(User* user, const std::string& text){
+Message::Message(User user, const std::string& text){
 	this->user = user;
 	this->text = text;
 }
@@ -24,7 +24,7 @@ Message::Message(User* user, const std::string& text){
 std::string Message::getText() const{
 	return this->text;
 }
-User* Message::getUserPointer() const{
+User Message::getUser() const{
 	return this->user;
 }
 
@@ -40,6 +40,11 @@ std::vector<User>::const_iterator Room::getUserIndex(const std::string& s) const
 	std::cout<<"FAILED TO FIND USER\n";
 	return users.end();
 }
+bool Room::userExists(const std::string& s) const{
+	if (getUserIndex(s)==users.end())
+		return false;
+	return true;
+}
 bool Room::addUser(User u){
 	this->users.push_back(u);
 	return true;
@@ -51,5 +56,12 @@ bool Room::deleteUser(const std::string& n){
 bool Room::newMessage(Message m){
 	messages.push_back(m);
 	return true;
+}
+std::string Room::dump() const{
+	std::string m = "";
+	for(auto i:this->messages){
+		m+=i.getUser().getName()+": "+i.getText()+"\n";
+	}
+	return m;
 }
 

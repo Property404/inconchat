@@ -69,7 +69,7 @@ class Server {
 
 protected:
     // Add member to port_functions
-    void addPortFunction(int port, &server, ResponseFunction function,
+    void addPortFunction(int port, ResponseFunction function,
                          int threads = -1);
 
     // Setters

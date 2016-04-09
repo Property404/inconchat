@@ -9,8 +9,8 @@ HTTPMessage::HTTPMessage(){
 void HTTPMessage::formFromData(const std::string& data){
 	// Empty field
 	topline = data.substr(0,data.find("\r\n"));
-	header = data.substr(data.find("\r\n")+2,data.find("\r\n\r\n"));
-	body = data.substr(data.find("\r\n\r\n"), data.length()-1);
+	header = data.substr(data.find("\r\n")+2,data.find("\r\n\r\n")-data.find("\r\n")-2);
+	body = data.substr(data.find("\r\n\r\n"), data.length()-1-data.find("\r\n\r\n"));
 }
 
 std::string HTTPMessage::toString() const{

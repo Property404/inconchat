@@ -187,6 +187,9 @@ SOCKET Server::makeServerSocket(int port) {
     return server_socket;
 }
 
+void Server::setTracing(bool b){
+	this->tracing = b;
+}
 bool Server::listenWithSocket(SOCKET server_socket,
                               Server::PortFunction pf) {
     //Variables
