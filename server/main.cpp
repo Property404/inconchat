@@ -140,6 +140,10 @@ class ChatServer: public Goat::Server{
 	}
 	static string reply_n(const Goat::Request& request){
 		std::string data = request.getData();
+		if(data.find("\r\n\r\n")!=string::npos){
+			data=data.substr(data.find("\r\n\r\n")+4,data.length()-1);
+		}
+		cout<<"Raw: "<<data<<"\n";
 		std::string response="idk";
 		std::string status="200";
 		if(data.length()>7){
@@ -152,7 +156,7 @@ Content-Length: "+std::to_string(response.length())+"\r\n\r\n"+response;
 	}
 public:
 	ChatServer(){
-		setTracing(false);
+		setTracing(true);
 		addPortFunction(2048,reply_n);
 	}
 };
