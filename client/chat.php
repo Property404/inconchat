@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 	<head><title>Inconvenient Chat</title>
- <script src="pixi.dev.js" type="text/javascript"></script>
     <script src="http://js.leapmotion.com/leap-0.4.2.js"></script>
 	<link rel="stylesheet" href="style.css">
 	</head>
