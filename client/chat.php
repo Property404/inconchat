@@ -6,8 +6,14 @@
 	<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
+		
 		<div class="chatbox">
-			<textarea name="chatarea" cols="30" rows="25" readonly></textarea><br>
+		<h1 class="topcenter">Inconvenient Chatroom</h1>
+			<pre>Use the LeapMotion Sensor to cycle through brainfuck
+commands. Use 'add' to submit a command to the buffer, and
+'rm' to remove it from the buffer. You can use '&lt;' to go
+backwards through the cycle.</pre>
+			<textarea name="chatarea" cols="30" rows="20" readonly></textarea><br>
 			
 		<script>
 		var username = <?php
@@ -21,7 +27,7 @@
 			var request = new XMLHttpRequest()
 			request.open("POST", "http://172.18.0.177:2048", true);
 			request.setRequestHeader("Content-Type","text/plain;charset=ASCII");
-			request.send(content);
+			request.send(content.replace("&lt;","<").replace("&gt",">"));
 			if (doit){
 			request.onreadystatechange = function(event) {
 				if (request.readyState == 4 && request.status == 200) {                
@@ -34,7 +40,9 @@
 		function newUser(user){
 			return sendPost("NUSR "+user,false);
 		}
+			
 		function newMessage(user,message){
+			message=message.replace("&lt;","<").replace("&gt",">");
 			return sendPost("NMSG "+user+" "+message,false);
 		}
 		function getMessages(){
@@ -56,6 +64,10 @@
 		<div name="qbox" id="qbox"></div>
 		<div name="bbox" id="bbox"/>,</div><br>
 		<input type="submit" value="add" onclick='document.getElementsByName("qbox")[0].innerHTML+=document.getElementsByName("bbox")[0].innerHTML;'>
+		<input type="submit" value="rm" onclick='var a=document.getElementsByName("qbox")[0].innerHTML;document.getElementsByName("qbox")[0].innerHTML=a.substr(0,a.length-1);'>
+		<input type="submit" value="<" onclick='r-=r?1:0;r=r%8;document.getElementsByName("bbox")[0].innerHTML=n[r%8];'>
+		<input type="submit" value="hw" onclick='document.getElementsByName("qbox")[0].innerHTML="++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";'>
+		<br>
 		<input type="submit" value="send" onclick="submit();">
 		<script>
 		var allow_dis=false;
@@ -93,9 +105,8 @@
         y = Math.round(1000* normPos[0])-500;
 		z = Math.round(1000* normPos[0])-500;
 		
-		if(Math.abs(y-ly)>=s){
-			r+=1;
-			document.getElementsByName("bbox")[0].innerHTML=n[r%8];
+		if(Math.abs(z-lz)>=s){
+			r+=1;document.getElementsByName("bbox")[0].innerHTML=n[r%8];
 		}
 		
 		lx = x;

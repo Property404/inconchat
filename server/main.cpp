@@ -78,7 +78,7 @@ std::string bfi(const std::string& source){
 				tape[pointer]=0;
 			}
 		}
-		else if(source[i]=='<'){
+		else if(source[i]=='<' && pointer>0){
 			pointer--;
 			if(pointer>100)printf("Error: Negative pointer");
 		}
@@ -114,6 +114,13 @@ class ChatServer: public Goat::Server{
 				
 				std::string username = data.substr(0,a);
 				std::string raw =data.substr(a+1,data.length()-1);
+				size_t f=raw.find("&lt;");
+				while((f=raw.find("&lt;"))!=std::string::npos){
+					raw=raw.replace(f,4, "<");
+				}
+				while((f=raw.find("&gt;"))!=std::string::npos){
+					raw=raw.replace(f,4, ">");
+				}
 				cout<<raw<<endl;
 				std::string message = bfi(raw);
 				cout<<message<<endl;
