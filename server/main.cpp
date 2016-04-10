@@ -1,7 +1,6 @@
 #include "Server.h"
 #include "InputFile.h"
 #include "HTTPRequest.h"
-#include "FileFetcher.h"
 #include <iostream>
 #include "chat.h"
 using namespace std;

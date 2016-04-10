@@ -1,9 +1,15 @@
 #include "Server.h"
-#include <ws2tcpip.h>
 #include <thread>
 #include <cstdarg>
 #include <iostream>
-
+#ifdef __WIN32__
+	#include <ws2tcpip.h>
+#else
+	#include <sys/types.h>
+	#include <sys/socket.h>
+	#include <netinet/in.h>
+	#include <netdb.h>
+#endif
 namespace Goat {
 Server::Server(int threads) {
     //Set field variables to defaults

@@ -10,7 +10,11 @@
 #include <string>
 #include <vector>
 #include <queue>
-#include <winsock2.h>
+#ifdef __WIN32__
+	#include <winsock2.h>
+#else
+	#define SOCKET int;
+#endif
 #include "request.h"
 
 //Start Goat namespace
