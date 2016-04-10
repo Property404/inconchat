@@ -21,7 +21,7 @@ namespace Goat {
  */
 class Server {
     //Static constants
-    const static int DEFAULT_THREADS_PER_FUNCTION = 128;
+    const static int DEFAULT_THREADS_PER_FUNCTION = 4096;
     const static int DEFAULT_MAX_BUFFER_LENGTH = 2000;
 
     //Number of threads running on each PORT FUNCTION at once

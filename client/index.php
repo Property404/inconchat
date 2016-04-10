@@ -6,7 +6,7 @@
 <body>
 
 <form method="POST"class="midcenter" action="chat.php">
-	Username:
+	Username:<br>
 	<input name="username" id="username" type="text"/><br>
 	<input type="submit" value="OK"/>
 </form>
